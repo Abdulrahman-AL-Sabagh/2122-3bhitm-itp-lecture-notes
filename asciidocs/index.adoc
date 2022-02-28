@@ -1442,6 +1442,118 @@ docker run -it my-ubuntu /bin/bash <.>
 
 
 
+== Docker
+
+=== Use cases of docker
+
+
+- You can use docker to ship, build  and run your software
+
+==== You can avoid many complex problems like:
+
+- on or more files missing
+- Software version mismatch
+- Different configuration settings
+
+=== Virtual Machines vs Containers
+---
+
+
+==== Virtual Machines VM
+
+
+- Virtual Machines are physical Hardware.
+- Every VM needs at least one hypervisor to run an OS
+- Examples for hypervisors are : VirtualBox, VMware, hyper-v
+
+
+====== Problems
+====
+- You need a full copy of an OS for each VM and that makes them slower
+- Resources intensive. You need to define a value of memory, size etc. for every single VM
+====
+
+==== Containers
+- Containers are isolated environment for running an application
+- You can run multiple apps in isolation
+- Are lightweight
+- A container is a special kind of process which has its own filesystem which is provided by the image
+
+
+NOTE:  Use OS of the host
+
+- start quickly
+
+NOTE: A container needs less hardware resources than the VM
+
+
+
+=== Architecture  of Docker
+
+- Docker uses a Client Server (`Docker Engine`) Architecture
+- Client uses REST API to communicate with the `ENGINE`
+- All containers share the kernel of the host
+
+IMPORTANT: a kernel manage applications and hardware resources
+
+
+=== images
+---
+
+- You need a dockerfile and an Application (java,react,node, etc ...) to generate an image
+- This image contains  everything your program needs to run like:
+
+====
+- A cut-down OS
+- Application files
+- Environment variables
+====
+
+- once you have your image, yuo can publish it on a Registry like (Dockerhub)
+
+IMPORTANT: YOU CAN NOT CHANGE ANYTHING ON AN IMAGE +
+
+==== Container
+---
+
+
+=== Docker commands
+---
+==== commands only in the docker file +
+---
+
+- `FROM <PATH>` : to grab a docker image from a registry
+- `Copy <PATH>` : to copy the files of your application in a directory in the image
+- `WORKDIR <NAME>` $PATH: all will run in this directory
+`example`: instead of writing +
+----------------------
+mkdir /app/new_dir
+----------------------
+
+you can write
+----------
+mkdir new_dir
+----------
+because you are already in the app directory
+
+- `CMD` to write commands (Linux commands, node, etc.)
+
+
+
+==== terminal commands
+---
+
+- ``docker build < -it> <the name of the directory where docker file is located> <Where do you want to save your docker image on your local OS>: +
+`` You can use this command to generate a new image
+
+- ``docker image ls `` : to see all images
+- ``docker run image ``: to run your image
+
+IMPORTANT: if you run an image that exist in the dockerhub, but you do not have it on your local-machine, docker will install it automatically
+
+- `docker pull <Docker image from the docker registry>` : to clone an image from the docker registry
+- `docker ps < -a>` : to see which containers are running currently
+
 
 
 
